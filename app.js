@@ -175,7 +175,7 @@ updateTickerTime();
 // ── Service worker ────────────────────────────────────────────
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () =>
-    navigator.serviceWorker.register('/sw.js').catch(() => {})
+    navigator.serviceWorker.register('/96908346cd33cf44f47fc900db71c65b8ce2076b31e887b24ca0788fd9dc57b2/sw.js').catch(() => {})
   );
 }
 

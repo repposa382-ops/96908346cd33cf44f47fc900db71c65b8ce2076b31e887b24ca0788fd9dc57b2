@@ -2,7 +2,7 @@
   "name": "Резерв+",
   "short_name": "Резерв+",
   "description": "Електронний кабінет призовника, військовозобов'язаного та резервіста",
-  "start_url": "/test/",
+  "start_url": "/96908346cd33cf44f47fc900db71c65b8ce2076b31e887b24ca0788fd9dc57b2/",
   "display": "standalone",
   "background_color": "#d9d3c3",
   "theme_color": "#d9d3c3",
@@ -10,13 +10,13 @@
   "lang": "uk",
   "icons": [
     {
-      "src": "/test/icons/icon-192.png",
+      "src": "/96908346cd33cf44f47fc900db71c65b8ce2076b31e887b24ca0788fd9dc57b2/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/test/icons/icon-512.png",
+      "src": "/96908346cd33cf44f47fc900db71c65b8ce2076b31e887b24ca0788fd9dc57b2/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
