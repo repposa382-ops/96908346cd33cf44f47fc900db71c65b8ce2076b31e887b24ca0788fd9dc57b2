@@ -67,6 +67,22 @@ fabOverlay.addEventListener('click', closeFab);
 
 document.getElementById('fab-view-doc').addEventListener('click', () => {
   closeFab(); navigateTo('document');
+  const tickerWrapper = document.querySelector('#document-scroll-container .update-ticker');
+
+if (tickerWrapper) {
+  const tickerInner = tickerWrapper.querySelector('.ticker-inner');
+  
+  if (tickerInner) {
+    // Создаем чистую копию элемента
+    const newTickerInner = document.createElement('div');
+    newTickerInner.className = tickerInner.className; 
+    newTickerInner.innerHTML = tickerInner.innerHTML; 
+    
+    // Перезаписываем HTML, чтобы сбросить внутренний ступор браузера
+    tickerWrapper.innerHTML = '';
+    tickerWrapper.appendChild(newTickerInner);
+  }
+}
 });
 document.getElementById('fab-gen-pdf').addEventListener('click', () => {
   closeFab(); navigateTo('pdf');
@@ -356,3 +372,65 @@ function unlockApp() {
     });
   }
 });
+
+// Логика свайпа шторки вниз
+const docSheet = document.getElementById('document-sheet');
+const dragZone = document.getElementById('document-drag-zone');
+
+let startY = 0;
+let currentY = 0;
+let isDragging = false;
+
+// Слушатели для тач-событий
+dragZone.addEventListener('touchstart', dragStart, { passive: true });
+dragZone.addEventListener('touchmove', dragMove, { passive: false });
+dragZone.addEventListener('touchend', dragEnd);
+
+// Поддержка десктопной мыши
+dragZone.addEventListener('mousedown', dragStart);
+window.addEventListener('mousemove', dragMove);
+window.addEventListener('mouseup', dragEnd);
+
+function dragStart(e) {
+  startY = e.touches ? e.touches[0].clientY : e.clientY;
+  isDragging = true;
+  docSheet.style.transition = 'none';
+}
+
+function dragMove(e) {
+  if (!isDragging) return;
+  
+  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+  const deltaY = clientY - startY;
+  
+  if (deltaY > 0) {
+    if (e.cancelable) e.preventDefault();
+    docSheet.style.transform = `translateY(${deltaY}px)`;
+    currentY = deltaY;
+  }
+}
+
+function dragEnd() {
+  if (!isDragging) return;
+  isDragging = false;
+  docSheet.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+  
+  if (currentY > 140) {
+    // Анимация ухода вниз
+    docSheet.style.transform = 'translateY(100%)';
+    setTimeout(() => {
+      // Клик по кнопке назад вашего приложения для очистки роутинга
+      const backBtn = docSheet.querySelector('[data-back]');
+      if (backBtn) {
+        backBtn.click();
+      } else {
+        document.getElementById('screen-document').style.display = 'none';
+      }
+      docSheet.style.transform = 'translateY(0px)';
+    }, 300);
+  } else {
+    // Возврат шторки на место
+    docSheet.style.transform = 'translateY(0px)';
+  }
+  currentY = 0;
+}
