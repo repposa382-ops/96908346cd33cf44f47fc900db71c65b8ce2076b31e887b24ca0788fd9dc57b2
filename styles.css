@@ -821,3 +821,82 @@ b, strong { font-weight: 400; }
   height: 60px;
   object-fit: contain;
 }
+
+/* 1. Главный контейнер карточки */
+.card-flip-container {
+  perspective: 1000px;
+  width: 100%;
+  max-width: 430px;
+  margin: 70px auto 130px auto;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+/* 2. Обертка, которая подстраивается под высоту внутренней карточки */
+.card-inner-wrapper {
+  position: relative;
+  width: 100%;
+  height: 520px; /* Привязываем точно к высоте .document-card */
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+/* 3. Обе стороны теперь гарантированно одинаковые */
+.card-side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 18px; /* Округлость как у .document-card */
+  box-sizing: border-box;
+}
+
+/* Передняя сторона */
+.card-front {
+  background-color: transparent; 
+  transform: rotateY(0deg); /* Явно задаем начальное положение */
+  transform-style: preserve-3d;
+}
+
+/* 4. Задняя сторона с QR-кодом (Сделана такой же, как передняя) */
+.card-back {
+  background-color: #fbfdfc; /* Ц`вет из переменной оригинальной карточки */
+  border: 1px solid var(--border-card);
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Центрируем контент по вертикали */
+  align-items: center;
+  padding: 32px 24px;         
+}
+
+/* Центрирование контента QR */
+.qr-screen-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Класс, который будет добавляться через JS при клике */
+.card-flip-container.flipped .card-inner-wrapper {
+  transform: rotateY(180deg);
+}
+
+/* Стили элементов экрана QR-кода */
+.qr-status-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 24px;
+  font-family: inherit;
+}
+
+.qr-image {
+  width: 100%;
+  height: 97%;
+  object-fit: contain;
+}

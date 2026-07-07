@@ -245,6 +245,29 @@ function initFabUpdate() {
 
 initFabUpdate();
 
+function initCardFlip() {
+  const card = document.getElementById('main-card');
+  if (!card) return;
+
+  card.addEventListener('click', (event) => {
+    // Список классов и ID, клик по которым НЕ должен переворачивать карту
+    const isFabClick = event.target.closest('#fab-options') || 
+                       event.target.closest('.fab-btn') || 
+                       event.target.closest('#fab-btn') || // Исключаем сам плюс
+                       event.target.closest('.action-fab') || // Исключаем класс плюса
+                       event.target.closest('.fab-opt-item') ||
+                       event.target.closest('.update-ticker');
+
+    // Если кликнули на элемент FAB или тикер — выходим из функции
+    if (isFabClick) return;
+    
+    // В противном случае — переворачиваем карту
+    card.classList.toggle('flipped');
+  });
+}
+
+initCardFlip();
+
 // ── Service worker ────────────────────────────────────────────
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () =>
