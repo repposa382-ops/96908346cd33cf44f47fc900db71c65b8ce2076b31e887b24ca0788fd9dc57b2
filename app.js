@@ -233,29 +233,30 @@ function initFabUpdate() {
       ticker.classList.add('ticker-updating');
     });
 
-    // Ждем ровно 1 минуту
+    // Таймер на 45 секунд
     setTimeout(() => {
-      // Возвращаем стандартный цвет тикера
-      tickers.forEach(ticker => {
+      // !!! КРИТИЧЕСКИЙ ШАГ: Находим тикеры ЗАНОВО, так как старые могли быть удалены при переоткрытии шторки
+      const freshTickers = document.querySelectorAll('.ticker-inner');
+      const freshUpdateTickers = document.querySelectorAll('.update-ticker');
+
+      // Возвращаем стандартный цвет фона
+      freshUpdateTickers.forEach(ticker => {
         ticker.classList.remove('ticker-updating');
       });
-      updateTickers.forEach(ticker => {
-      ticker.classList.remove('ticker-updating');
 
-      // Получаем абсолютно чистое время НА МОМЕНТ ЗАВЕРШЕНИЯ
+      // Формируем актуальное время окончания
       const exactNow = new Date(); 
       const cleanTimeStr = formatCleanDate(exactNow);
-
-      // Выводим в тикер актуальное время БЕЗ сдвигов
       const finalLines = `Документ оновлено о ${cleanTimeStr} •&nbsp; `.repeat(16);
-      tickers.forEach(ticker => {
+
+      // Записываем финальный текст в РЕАЛЬНО существующие элементы
+      freshTickers.forEach(ticker => {
+        ticker.classList.remove('ticker-updating');
         ticker.innerHTML = finalLines;
       });
-    });
 
-      // Разблокируем кнопку для будущих нажатий
       isUpdating = false;
-    }, 45000); // 45 
+    }, 45000);
   });
 }
 
