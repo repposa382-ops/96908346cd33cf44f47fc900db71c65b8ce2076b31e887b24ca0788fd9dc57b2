@@ -208,7 +208,16 @@ b, strong { font-weight: 400; }
   white-space: nowrap;
   font-weight: 400;
   padding-left: 10px;
+  will-change: transform;
   animation: ticker 45s linear infinite;
+}
+/* Пример: стиль тикера во время обновления данных */
+.update-ticker.ticker-updating {
+  background: #fcea62 !important;
+}
+
+.ticker-inner.ticker-updating {
+  color: #000000 !important;
 }
 @keyframes ticker {
   from { transform: translateX(0); }

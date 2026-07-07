@@ -71,9 +71,6 @@ document.getElementById('fab-view-doc').addEventListener('click', () => {
 document.getElementById('fab-gen-pdf').addEventListener('click', () => {
   closeFab(); navigateTo('pdf');
 });
-document.getElementById('fab-update').addEventListener('click', () => {
-  closeFab(); showToast('Дані оновлено з реєстру Оберіг');
-});
 
 // ── Menu items ───────────────────────────────────────────────
 document.getElementById('menu-doc')
@@ -148,29 +145,105 @@ function showToast(msg) {
 }
 
 // ── Update ticker time ────────────────────────────────────────
-function updateTickerTime() {
-  const now = new Date();
-  // Вычитаем 3 часа 47 минут 21 секунду
-  now.setHours(now.getHours() - 3);
-  now.setMinutes(now.getMinutes() - 47);
-  now.setSeconds(now.getSeconds() - 21);
+function updateTickerTime(baseDate = new Date()) {
+  const now = new Date(baseDate);
+  const currentHour = now.getHours();
   
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const year = now.getFullYear();
+  // Вычисляем сдвиг в зависимости от времени суток
+  if (currentHour >= 0 && currentHour < 15) {
+    now.setHours(now.getHours() - 1);
+    now.setMinutes(now.getMinutes() - 23);
+  } else {
+    now.setHours(now.getHours() - 3);
+    now.setMinutes(now.getMinutes() - 47);
+    now.setSeconds(now.getSeconds() - 21);
+  }
   
-  const timeStr = `${hours}:${minutes} | ${day}.${month}.${year}`;
+  // Передаем измененную дату в общую функцию форматирования
+  const timeStr = formatCleanDate(now);
   
-  // Обновляем всі ticker'и на странице
+  // Обновляем тикеры на странице
+  const repeatingText = `Документ оновлено о ${timeStr} •&nbsp; `.repeat(16);
   document.querySelectorAll('.ticker-inner').forEach(ticker => {
-    ticker.innerHTML = `Документ оновлено о ${timeStr} •&nbsp; Документ оновлено о ${timeStr} •&nbsp; Документ оновлено о ${timeStr} •&nbsp; Документ оновлено о ${timeStr} •&nbsp; Документ оновлено о ${timeStr} •&nbsp; Документ оновлено о ${timeStr} •&nbsp; Документ оновлено о ${timeStr} •&nbsp; Документ оновлено о ${timeStr} •&nbsp; Документ оновлено о ${timeStr} •&nbsp; Документ оновлено о ${timeStr} •&nbsp; Документ оновлено о ${timeStr} •&nbsp; Документ оновлено о ${timeStr} •&nbsp; Документ оновлено о ${timeStr} •&nbsp; Документ оновлено о ${timeStr} •&nbsp; Документ оновлено о ${timeStr} •&nbsp; Документ оновлено о ${timeStr} •&nbsp;`;
+    ticker.innerHTML = repeatingText;
   });
 }
 
-// Обновляем при загрузке
+// Обновляем при загрузке (автоматически возьмет текущее время)
 updateTickerTime();
+
+// Переменная-флаг для защиты от повторных кликов
+let isUpdating = false;
+
+// Вспомогательная функция, которая просто красиво форматирует любую переданную дату БЕЗ вычитаний
+function formatCleanDate(date) {
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  
+  return `${hours}:${minutes} | ${day}.${month}.${year}`;
+}
+
+function initFabUpdate() {
+  // Находим кнопку строго по вашему ID из HTML
+  const updateBtn = document.getElementById('fab-update');
+  
+  if (!updateBtn) {
+    console.error("Кнопка с id='fab-update' не найдена в HTML!");
+    return;
+  }
+
+  updateBtn.addEventListener('click', (event) => {
+    // Останавливаем всплытие события, чтобы шторка не думала, что её свайпают
+    event.stopPropagation();
+    event.preventDefault();
+    closeFab();
+
+    if (isUpdating) return;
+    isUpdating = true;
+
+    const tickers = document.querySelectorAll('.ticker-inner');
+    const updateTickers = document.querySelectorAll('.update-ticker');
+    
+    // Включаем режим обновления (меняем цвет и текст)
+    tickers.forEach(ticker => {
+      ticker.classList.add('ticker-updating');
+      ticker.innerHTML =` Оновлюємо документ •&nbsp;Оновимо за годину •&nbsp;Дякуємо за терпіння! •&nbsp;`.repeat(7);
+    });
+
+    updateTickers.forEach(ticker => {
+      ticker.classList.add('ticker-updating');
+    });
+
+    // Ждем ровно 1 минуту
+    setTimeout(() => {
+      // Возвращаем стандартный цвет тикера
+      tickers.forEach(ticker => {
+        ticker.classList.remove('ticker-updating');
+      });
+      updateTickers.forEach(ticker => {
+      ticker.classList.remove('ticker-updating');
+
+      // Получаем абсолютно чистое время НА МОМЕНТ ЗАВЕРШЕНИЯ
+      const exactNow = new Date(); 
+      const cleanTimeStr = formatCleanDate(exactNow);
+
+      // Выводим в тикер актуальное время БЕЗ сдвигов
+      const finalLines = `Документ оновлено о ${cleanTimeStr} •&nbsp; `.repeat(16);
+      tickers.forEach(ticker => {
+        ticker.innerHTML = finalLines;
+      });
+    });
+
+      // Разблокируем кнопку для будущих нажатий
+      isUpdating = false;
+    }, 45000); // 45 
+  });
+}
+
+initFabUpdate();
 
 // ── Service worker ────────────────────────────────────────────
 if ('serviceWorker' in navigator) {
