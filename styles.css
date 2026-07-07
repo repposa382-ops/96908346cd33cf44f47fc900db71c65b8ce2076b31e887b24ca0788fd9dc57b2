@@ -269,6 +269,7 @@ b, strong { font-weight: 400; }
   flex-direction: column;
   gap: 10px;
   align-items: flex-end;
+  margin-bottom: 50px;
 }
 @media (max-width: 412px) {
   .fab-options { right: 20px; }
@@ -331,7 +332,9 @@ b, strong { font-weight: 400; }
   font-family: inherit;
 }
 .nav-link.active { font-weight: 700; }
-.nav-icon-svg { width: 22px; height: 22px; opacity: 1; }
+.nav-icon { width: 24px; height: 25px; opacity: 1; }
+.icon-pin { width: 22px; height: 22px; opacity: 1; }
+.icon-plus { width: 24px; height: 25px; opacity: 1; }
 
 /* ===== INNER SCREENS ===== */
 .inner-screen {
@@ -669,11 +672,6 @@ b, strong { font-weight: 400; }
   flex-shrink: 0;
 }
 
-.fab-opt-icon svg {
-  width: 22px;
-  height: 22px;
-  stroke: #000000;                /* Чисто черные линии иконок */
-}
 
 /* Классы для анимации скрытия/открытия через JS */
 .fab-overlay.hidden {
@@ -685,22 +683,6 @@ b, strong { font-weight: 400; }
   transform: translateY(100%);   /* Уезжает плавно вниз за экран */
   pointer-events: none;
 }
-/* Принудительно красим иконки шторки в черный цвет и убираем оранжевый */
-.fab-options .fab-opt-icon,
-.fab-options .fab-opt-item svg,
-.fab-options .fab-opt-item svg * {
-  stroke: #000000 !important;   /* Цвет контура — строго черный */
-  fill: transparent !important; /* Убираем любую случайную оранжевую заливку */
-  background: transparent !important;
-  background-color: transparent !important;
-}
-
-/* Исключение для иконки (i) — если кругу нужна прозрачная заливка, а не черная */
-.fab-options .fab-opt-item svg circle {
-  fill: transparent !important;
-  stroke: #000000 !important;
-}
-
 /* Экран пин-кода */
 .screen-pin-lock {
   position: absolute;
@@ -708,7 +690,7 @@ b, strong { font-weight: 400; }
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #e0dfcb; /* Бежевый фон */
+  background-color: #e6e2d4; /* Бежевый фон */
   z-index: 10000;            /* Поверх всего */
   display: flex;             /* Изначально открыт! */
   flex-direction: column;
@@ -814,4 +796,19 @@ b, strong { font-weight: 400; }
   color: #000000;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Стили для самой кнопки FaceID */
+#pin-faceid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px; /* Создает красивый отступ от краев кнопки до иконки */
+  box-sizing: border-box;
+}
+
+#pin-faceid .icon-pin {
+  width: 60px;  /* Оптимальный размер для аккуратного отображения */
+  height: 60px;
+  object-fit: contain;
 }
