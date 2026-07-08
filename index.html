@@ -221,31 +221,32 @@
       <div class="sheet-modal" id="document-sheet">
 
         <!-- СТАТИЧНАЯ ЧАСТЬ ШТОРКИ (НЕ СКОЛЬЗИТ ПРИ СКРОЛЛЕ) -->
-<div class="sheet-header" id="document-drag-zone">
-  <div class="pull-handle"></div>
-  <div class="inner-topbar-custom">
-    <button class="back-btn-custom" data-back></button>
-  </div>
-</div> 
+        <div class="sheet-header" id="document-drag-zone">
+          <div class="fab-drag-handle"></div>
+          <div class="inner-topbar-custom">
+            <button class="back-btn-custom" data-back></button>
+          </div>
+        </div>
 
-<!-- СКРОЛЛИРУЕМАЯ ЧАСТЬ (ВСЁ, ЧТО ВНУТРИ, БУДЕТ УЕЗЖАТЬ ВВЕРХ) -->
-<div class="sheet-body-scroll" id="document-scroll-container">
-  
-  <!-- Шапка "Резерв ID" — теперь скроллится! -->
-  <div class="card-top-outside">
-    <div class="card-title-outside">Резерв ID</div>
-    <img class="coat-of-arms-outside" src="svg/coat-of-arms.svg" alt="">
-  </div>
+        <!-- СКРОЛЛИРУЕМАЯ ЧАСТЬ (ВСЁ, ЧТО ВНУТРИ, БУДЕТ УЕЗЖАТЬ ВВЕРХ) -->
+        <div class="sheet-body-scroll" id="document-scroll-container">
 
-  <!-- Коричневая бегущая строка — тоже скроллится! -->
-  <div class="update-ticker">
-    <div class="ticker-inner">Документ оновлено о 12:32 | 17.05.2026 &nbsp;•&nbsp; Документ оновлено о 12:32 | 17.05.2026 &nbsp;•&nbsp;</div>
-  </div>
+          <!-- Шапка "Резерв ID" - теперь скроллится! -->
+          <div class="card-top-outside">
+            <div class="card-title-outside">Резерв ID</div>
+            <img class="coat-of-arms-outside" src="svg/coat-of-arms.svg" alt="">
+          </div>
 
-  <!-- Белая карточка с контентом -->
-  <div class="document-card-custom">
-    <div class="card-content-main">              
-      <div class="user-main-block">
+          <!-- Коричневая бегущая строка - тоже скроллится! -->
+          <div class="update-ticker">
+            <div class="ticker-inner">Документ оновлено о 12:32 | 17.05.2026 &nbsp;•&nbsp; Документ оновлено о 12:32 |
+              17.05.2026 &nbsp;•&nbsp;</div>
+          </div>
+
+          <!-- Белая карточка с контентом -->
+          <div class="document-card-custom">
+            <div class="card-content-main">
+              <div class="user-main-block">
                 <h2 class="user-fullname">КОПЧЕНОВ<br>ДЕНИС<br>Дмитрович</h2>
                 <div class="user-status-tag">Військовозобов'язаний</div>
               </div>
@@ -689,8 +690,203 @@
             alt="">Меню</button>
       </nav>
     </div>
+    <!-- ЭКРАН ПРОСМОТРА PDF -->
+    <div class="pdf-viewer-overlay" id="pdf-viewer">
+      <!-- Верхний бар iOS -->
+      <div class="pdf-top-bar">
+        <div class="pdf-top-left"></div>
+        <div class="pdf-top-title">
+          Військово-обліковий документ
+          <span class="pdf-chevron-down"></span>
+        </div>
+        <button class="pdf-done-btn" id="pdf-close-btn">Done</button>
+      </div>
 
+      <!-- Индикатор страниц (1 из 1) -->
+      <div class="pdf-page-indicator">
+        <span>1 из 1</span>
+      </div>
+
+      <!-- Область самого документа (белый лист бумаги) -->
+      <div class="pdf-scroll-container">
+        <div class="pdf-document-sheet">
+
+          <!-- Шапка документа -->
+          <div class="pdf-sheet-header">
+<div class="pdf-header-left">
+  <!-- Логотип слева -->
+  <div class="pdf-logo-rezerv">Резерв<span>+</span></div>
+  
+  <!-- Метаданные справа от логотипа -->
+  <div class="pdf-doc-meta">
+    <div class="pdf-meta-title">Військово-обліковий документ</div>
+    <div class="pdf-meta-date" id="pdf-generated-date">Сформовано: --.--.----, --:--</div>
+  </div>
+</div>
+            <div class="pdf-header-right">
+              <img src="svg/coat-of-arms.svg" alt="" class="pdf-min-logo">
+              <div class="pdf-min-title">Міністерство<br>оборони України</div>
+            </div>
+          </div>
+
+          <!-- Блок с фото и ФИО -->
+          <div class="pdf-user-profile">
+            <div class="pdf-user-photo-container">
+              <img src="photo/main_photo.png" alt="" class="pdf-user-avatar">
+            </div>
+            <div class="pdf-profile-info">
+              <div class="pdf-warning-tag">Військовозобов'язаний</div>
+              <h1 class="pdf-user-fullname">КОПЧЕНОВ ДЕНИС<br>Дмитрович</h1>
+
+              <div class="pdf-grid-row-3">
+                <div>
+                  <span class="pdf-field-label">Дата народження</span>
+                  <span class="pdf-field-value">17.12.1994</span>
+                </div>
+                <div>
+                  <span class="pdf-field-label">Дійсний до *</span>
+                  <span class="pdf-field-value">30.01.2027</span>
+                </div>
+                <div>
+                  <span class="pdf-field-label">РНОКПП</span>
+                  <span class="pdf-field-value">3468400817</span>
+                </div>
+              </div>
+
+              <div class="pdf-grid-row-2">
+                <div>
+                  <span class="pdf-field-label">Категорія обліку</span>
+                  <span class="pdf-field-value">Військовозобов'язаний</span>
+                </div>
+                <div>
+                  <span class="pdf-field-label">Підстава зняття\виключення</span>
+                  <span class="pdf-field-value">-</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pdf-divider"></div>
+
+          <!-- ТЦК та СП -->
+          <div class="pdf-full-width-field">
+            <span class="pdf-field-label-small">ТЦК та СП</span>
+            <span class="pdf-field-value">Шевченківський районний у місті Харків ТЦК та СП</span>
+          </div>
+
+          <!-- Звання / Реєстр / ВОС -->
+          <div class="pdf-grid-row-3 no-margin">
+            <div>
+              <span class="pdf-field-label">Звання</span>
+              <span class="pdf-field-value-medium">Молодший лейтенант</span>
+            </div>
+            <div>
+              <span class="pdf-field-label">Номер в реєстрі Оберіг</span>
+              <span class="pdf-field-value-medium">070320231455578400141</span>
+            </div>
+            <div>
+              <span class="pdf-field-label">ВОС</span>
+              <span class="pdf-field-value-medium">909000</span>
+            </div>
+          </div>
+
+          <div class="pdf-full-width-field item-sub">
+            <span class="pdf-field-value-medium">Фармація</span>
+          </div>
+
+          <div class="pdf-divider"></div>
+
+          <!-- Отсрочки -->
+          <div class="pdf-grid-row-2">
+            <div>
+              <span class="pdf-field-label">Тип відстрочки:</span>
+              <span class="pdf-field-value-medium">бронювання</span>
+            </div>
+            <div>
+              <span class="pdf-field-label">Відстрочка до</span>
+              <span class="pdf-field-value-medium">30.01.2027</span>
+            </div>
+          </div>
+
+          <div class="pdf-divider"></div>
+
+          <!-- ВЛК -->
+          <div class="pdf-grid-row-2">
+            <div>
+              <span class="pdf-field-label">Постанова ВЛК</span>
+              <span class="pdf-field-value-medium">-</span>
+            </div>
+            <div>
+              <span class="pdf-field-label">Дата ВЛК</span>
+              <span class="pdf-field-value-medium">-</span>
+            </div>
+          </div>
+
+          <!-- Инвалидность -->
+          <div class="pdf-grid-row-2">
+            <div>
+              <span class="pdf-field-label">Група інвалідності</span>
+              <span class="pdf-field-value-medium">-</span>
+            </div>
+            <div>
+              <span class="pdf-field-label">Діє до</span>
+              <span class="pdf-field-value-medium">-</span>
+            </div>
+          </div>
+
+          <div class="pdf-full-width-field">
+            <span class="pdf-field-label">Причина інвалідності</span>
+            <span class="pdf-field-value-medium">-</span>
+          </div>
+
+          <div class="pdf-divider"></div>
+
+          <!-- Контакты и QR-код -->
+          <div class="pdf-footer-layout">
+            <div class="pdf-footer-contacts">
+              <div class="pdf-contact-block">
+                <span class="pdf-field-label">Адреса проживання</span>
+                <span class="pdf-field-value-small">Україна, Харківська область, м Харків, Мирослава Мисли, б. 54, кв.
+                  213</span>
+              </div>
+              <div class="pdf-contact-block">
+                <span class="pdf-field-label">Телефон</span>
+                <span class="pdf-field-value-small">380953546228</span>
+              </div>
+              <div class="pdf-contact-block">
+                <span class="pdf-field-label">Email</span>
+                <span class="pdf-field-value-small">denisko555@gmail.com</span>
+              </div>
+
+              <div class="pdf-sync-date-block">
+                <span class="pdf-field-label">Дата уточнення даних</span>
+                <span class="pdf-field-value-sync">20.05.2025</span>
+              </div>
+            </div>
+
+            <div class="pdf-footer-qrcode-zone">
+              <img src="icons/qr-code.png" alt="" class="pdf-real-qr">
+            </div>
+          </div>
+
+          <!-- Мелкий текст внизу бланка -->
+          <div class="pdf-legal-note">
+            * Документ дійсний до зазначеної на ньому дати. Якщо вказані в ньому дані змінюються в Єдиному державному
+            реєстрі призовників, військовозобов'язаних і резервістів «Оберіг», документ втрачає чинність. Завантажуйте
+            мобільний застосунок Резерв+ та користуйтеся завжди актуальним электронним документом.
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Нижний навигационный бар iOS (Шаринг и Лупа) -->
+      <div class="pdf-bottom-bar">
+        <button class="pdf-action-btn btn-share"></button>
+        <button class="pdf-action-btn btn-search-pdf"></button>
+      </div>
+    </div>
   </div><!-- /app -->
+
 
   <script src="app.js"></script>
 </body>

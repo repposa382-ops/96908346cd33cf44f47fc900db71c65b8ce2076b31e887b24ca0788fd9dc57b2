@@ -12,6 +12,7 @@ const screens = {
 
 let current  = 'main';
 let previous = null;
+window.lastTickerTimeStr = "";
 
 function navigateTo(name) {
   if (!screens[name] || name === current) return;
@@ -113,24 +114,6 @@ const steps = [
   [100, 'Готово!'],
 ];
 
-// Находим кнопку генерации (проверь ID или класс своей кнопки в HTML)
-const generatePdfBtn = document.getElementById('generate-pdf-btn') || document.querySelector('.fab-item-pdf');
-
-if (generatePdfBtn) {
-  generatePdfBtn.addEventListener('click', (event) => {
-    // Останавливаем всплытие, чтобы шторка не реагировала
-    event.stopPropagation();
-    event.preventDefault();
-
-    // Просто закрываем FAB-меню
-    if (typeof closeFab === 'function') {
-      closeFab();
-    }
-    
-    console.log("Генерация PDF отключена. FAB-меню успешно закрыто.");
-  });
-}
-
 
 // ── Toast ─────────────────────────────────────────────────────
 function showToast(msg) {
@@ -172,11 +155,14 @@ function updateTickerTime(baseDate = new Date()) {
   // Передаем измененную дату в общую функцию форматирования
   const timeStr = formatCleanDate(now);
   
+  window.lastTickerTimeStr = timeStr;
   // Обновляем тикеры на странице
   const repeatingText = `Документ оновлено о ${timeStr} •&nbsp; `.repeat(16);
   document.querySelectorAll('.ticker-inner').forEach(ticker => {
     ticker.innerHTML = repeatingText;
   });
+
+  return timeStr; 
 }
 
 // Обновляем при загрузке (автоматически возьмет текущее время)
@@ -241,6 +227,7 @@ function initFabUpdate() {
       // Формируем актуальное время окончания
       const exactNow = new Date(); 
       const cleanTimeStr = formatCleanDate(exactNow);
+      window.lastTickerTimeStr = cleanTimeStr;
       const finalLines = `Документ оновлено о ${cleanTimeStr} •&nbsp; `.repeat(16);
 
       // Записываем финальный текст в РЕАЛЬНО существующие элементы
@@ -429,3 +416,45 @@ function dragEnd() {
   }
   currentY = 0;
 }
+
+function initPdfViewer() {
+  const pdfViewer = document.getElementById('pdf-viewer');
+  const pdfGeneratedDate = document.getElementById('pdf-generated-date');
+
+  document.addEventListener('click', (event) => {
+    const target = event.target.closest('#fab-gen-pdf');
+    
+    if (target) {
+      event.stopPropagation();
+      event.preventDefault();
+
+      // 1. Закрываем FAB-меню
+      if (typeof closeFab === 'function') {
+        closeFab();
+      }
+
+      // 2. БЕРЕМ ДАННЫЕ ИЗ ГЛОБАЛЬНОЙ ПЕРЕМЕННОЙ
+      if (pdfGeneratedDate) {
+        // Если переменная пустая (вдруг не успела рассчитаться), берем текущее время как запасной вариант
+        const finalTime = window.lastTickerTimeStr || formatCleanDate(new Date());
+        pdfGeneratedDate.innerHTML = `Сформовано: ${finalTime}`;
+      }
+
+      // 3. Открываем PDF экран
+      if (pdfViewer) {
+        pdfViewer.classList.add('active');
+      }
+    }
+  });
+
+  // Кнопка закрытия Done
+  const pdfCloseBtn = document.getElementById('pdf-close-btn');
+  if (pdfCloseBtn) {
+    pdfCloseBtn.addEventListener('click', (event) => {
+      event.stopPropagation();
+      if (pdfViewer) pdfViewer.classList.remove('active');
+    });
+  }
+}
+
+initPdfViewer();
