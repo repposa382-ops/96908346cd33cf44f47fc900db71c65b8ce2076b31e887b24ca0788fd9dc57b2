@@ -5,7 +5,6 @@ const screens = {
   main:          document.getElementById('screen-main'),
   notifications: document.getElementById('screen-notifications'),
   document:      document.getElementById('screen-document'),
-  pdf:           document.getElementById('screen-pdf'),
   services:      document.getElementById('screen-services'),
   vacancies:     document.getElementById('screen-vacancies'),
   menu:          document.getElementById('screen-menu'),
@@ -114,28 +113,23 @@ const steps = [
   [100, 'Готово!'],
 ];
 
-genBtn.addEventListener('click', () => {
-  if (genBtn.disabled) return;
-  genBtn.disabled = true;
-  progress.classList.remove('hidden');
-  fill.style.width = '0%';
-  let i = 0;
-  const iv = setInterval(() => {
-    if (i >= steps.length) {
-      clearInterval(iv);
-      setTimeout(() => {
-        genBtn.disabled = false;
-        progress.classList.add('hidden');
-        showToast('PDF успішно згенеровано!');
-      }, 500);
-      return;
-    }
-    fill.style.width  = steps[i][0] + '%';
-    ptext.textContent = steps[i][1];
-    i++;
-  }, 800);
-});
+// Находим кнопку генерации (проверь ID или класс своей кнопки в HTML)
+const generatePdfBtn = document.getElementById('generate-pdf-btn') || document.querySelector('.fab-item-pdf');
 
+if (generatePdfBtn) {
+  generatePdfBtn.addEventListener('click', (event) => {
+    // Останавливаем всплытие, чтобы шторка не реагировала
+    event.stopPropagation();
+    event.preventDefault();
+
+    // Просто закрываем FAB-меню
+    if (typeof closeFab === 'function') {
+      closeFab();
+    }
+    
+    console.log("Генерация PDF отключена. FAB-меню успешно закрыто.");
+  });
+}
 
 
 // ── Toast ─────────────────────────────────────────────────────
