@@ -206,7 +206,7 @@ function initFabUpdate() {
     // Включаем режим обновления (меняем цвет и текст)
     tickers.forEach(ticker => {
       ticker.classList.add('ticker-updating');
-      ticker.innerHTML =`Потрібно почекати Оновлюємо документ •&nbsp;Потрібно почекати Оновлюємо документ •&nbsp;`.repeat(7);
+      ticker.innerHTML =`Потрібно почекати  Оновлюємо документ •&nbsp;Потрібно почекати  Оновлюємо документ •&nbsp;`.repeat(7);
     });
 
     updateTickers.forEach(ticker => {
