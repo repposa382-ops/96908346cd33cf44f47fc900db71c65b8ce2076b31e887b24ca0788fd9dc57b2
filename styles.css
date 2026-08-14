@@ -366,19 +366,23 @@ strong {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, .35);
-  z-index: 40;
+  z-index: 1100;
 }
 
 .fab-options {
-  position: fixed;
-  right: calc(50% - 206px + 20px);
-  bottom: calc(105px + env(safe-area-inset-bottom, 0px));
-  z-index: 50;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: flex-end;
-  margin-bottom: 50px;
+    position: fixed;
+
+    right: calc(50% - 206px + 20px);
+    bottom: calc(105px + env(safe-area-inset-bottom, 0px));
+
+    z-index: 1101;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+
+    margin-bottom: 50px;
 }
 
 @media (max-width: 412px) {
@@ -518,7 +522,7 @@ strong {
   width: 40px;
   height: 40px;
   border-radius: 20px;
-  background: #000000;
+  background: #e0dfcb;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1417,7 +1421,7 @@ strong {
 /* Шапка шторки фиксированная */
 .sheet-header {
   background: var(--bg-screen);
-  padding-top: 8px;
+  padding-top: 4px;
   padding-bottom: 4px;
   flex-shrink: 0;
   display: flex;
@@ -1442,7 +1446,7 @@ strong {
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  height: 44px;
+  height: 1px;
 }
 
 .back-btn-custom {
@@ -1898,4 +1902,190 @@ strong {
   justify-content: space-between;
   padding: 0 24px;
   padding-bottom: env(safe-area-inset-bottom);
+}
+/* =========================================
+   FLOATING BOTTOM NAV
+   ========================================= */
+.bottom-nav-container {
+  position: fixed;
+  bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  left: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+
+  padding: 0 20px;
+
+  z-index: 100;
+  pointer-events: none;
+}
+
+
+/* Основная белая/молочная капсула */
+.bottom-nav {
+  width: 100%;
+  max-width: 376px;
+  height: 60px;
+
+  padding: 2px 4px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: rgba(247, 247, 239, 0.96);
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+
+  border-radius: 30px;
+
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.04),
+    0 8px 24px rgba(0, 0, 0, 0.08);
+
+  pointer-events: auto;
+
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+
+/* =========================================
+   NAV ITEM
+   ========================================= */
+
+.nav-item {
+  position: relative;
+
+  flex: 1;
+  height: 56px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 1px;
+
+  color: #111111;
+
+  text-decoration: none;
+
+  border-radius: 28px;
+
+  -webkit-tap-highlight-color: transparent;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   ACTIVE ITEM
+   ========================================= */
+
+.nav-item.active {
+  background: #e3e3da;
+}
+
+
+/* =========================================
+   ICON
+   ========================================= */
+
+.nav-icon-wrapper {
+  width: 26px;
+  height: 27px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+
+.nav-icon {
+  width: 25px;
+  height: 25px;
+
+  display: block;
+
+  color: #080808;
+}
+
+
+/* =========================================
+   LABEL
+   ========================================= */
+
+.nav-label {
+  display: block;
+
+  font-family:
+    'e-Ukraine Core',
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "SF Pro Text",
+    sans-serif;
+
+  font-size: 12px;
+  line-height: 15px;
+
+  font-weight: 500;
+
+  color: #111111;
+
+  letter-spacing: -0.2px;
+
+  white-space: nowrap;
+}
+
+
+/* Активный текст жирнее */
+.nav-item.active .nav-label {
+  font-weight: 700;
+}
+
+
+/* =========================================
+   IOS TOUCH
+   ========================================= */
+
+.nav-item:active {
+  transform: scale(0.97);
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 380px) {
+
+  .bottom-nav-container {
+    padding: 0 16px;
+  }
+
+  .bottom-nav {
+    height: 58px;
+    border-radius: 29px;
+  }
+
+  .nav-item {
+    height: 54px;
+  }
+
+  .nav-icon {
+    width: 23px;
+    height: 23px;
+  }
+
+  .nav-label {
+    font-size: 11px;
+    line-height: 14px;
+  }
 }

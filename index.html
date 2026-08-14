@@ -167,24 +167,91 @@
         </button>
       </div>
 
-      <nav class="bottom-navigation">
-        <button class="nav-link active" data-screen="main">
-          <img class="nav-icon" src="icons/id.png" alt="">
-          Резерв ID
-        </button>
-        <button class="nav-link" data-screen="services">
-          <img class="nav-icon" src="icons/services.png" alt="">
-          Сервіси
-        </button>
-        <button class="nav-link" data-screen="vacancies">
-          <img class="nav-icon" src="icons/vacancies.png" alt="">
-          Вакансії
-        </button>
-        <button class="nav-link" data-screen="menu">
-          <img class="nav-icon" src="icons/menu.png" alt="">
-          Меню
-        </button>
-      </nav>
+      <!-- НИЖНИЙ NAVBAR -->
+<nav class="bottom-nav-container">
+  <div class="bottom-nav">
+
+    <!-- Резерв ID -->
+    <a href="#" class="nav-item active">
+      <div class="nav-icon-wrapper">
+        <svg class="nav-icon nav-id-icon"
+             viewBox="0 0 24 24"
+             fill="none">
+          <rect x="4" y="3" width="16" height="18" rx="1.5"
+                fill="currentColor"/>
+          <rect x="6.5" y="13.5" width="11" height="2"
+                rx="0.5"
+                fill="white"/>
+          <rect x="6.5" y="17" width="11" height="2"
+                rx="0.5"
+                fill="white"/>
+        </svg>
+      </div>
+      <span class="nav-label">Резерв ID</span>
+    </a>
+
+<!-- Сервіси -->
+<a href="#" class="nav-item">
+  <div class="nav-icon-wrapper">
+    <svg class="nav-icon"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="1.8"
+         stroke-linejoin="round">
+      <rect x="3.5" y="3.5" width="7" height="7" rx="1"/>
+      <rect x="13.5" y="3.5" width="7" height="7" rx="1"/>
+      <rect x="3.5" y="13.5" width="7" height="7" rx="1"/>
+      <rect x="13.5" y="13.5" width="7" height="7" rx="1"/>
+    </svg>
+  </div>
+  <span class="nav-label">Сервіси</span>
+</a>
+
+<!-- Вакансії -->
+<a href="#" class="nav-item">
+  <div class="nav-icon-wrapper">
+    <svg class="nav-icon"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2.2"
+         stroke-linejoin="round">
+
+      <!-- Внешний вертикальный прямоугольник -->
+      <rect x="5" y="3" width="14" height="18" rx="1.5"/>
+
+      <!-- Ромб строго по центру -->
+      <rect x="9" y="9" width="6" height="6"
+            transform="rotate(45 12 12)"
+            fill="currentColor"
+            stroke="none"/>
+
+    </svg>
+  </div>
+
+  <span class="nav-label">Вакансії</span>
+</a>
+
+    <!-- Меню -->
+    <a href="#" class="nav-item">
+      <div class="nav-icon-wrapper">
+        <svg class="nav-icon"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2.4"
+             stroke-linecap="square">
+          <line x1="4" y1="6" x2="20" y2="6"/>
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <line x1="4" y1="18" x2="20" y2="18"/>
+        </svg>
+      </div>
+      <span class="nav-label">Меню</span>
+    </a>
+
+  </div>
+</nav>
     </div>
 
     <!-- ══════════════════════════════════════════
@@ -201,16 +268,6 @@
           <div class="inner-title">Сповіщення</div>
         </div>
       </div>
-      <nav class="bottom-navigation">
-        <button class="nav-link" data-screen="main"><img class="nav-icon-svg" src="svg/tab-rezerv-id.svg" alt="">Резерв
-          ID</button>
-        <button class="nav-link" data-screen="services"><img class="nav-icon-svg" src="svg/tab-services.svg"
-            alt="">Сервіси</button>
-        <button class="nav-link active" data-screen="notifications"><img class="nav-icon-svg"
-            src="svg/tab-vacancies.svg" alt="">Сповіщення</button>
-        <button class="nav-link" data-screen="menu"><img class="nav-icon-svg" src="svg/tab-menu.svg"
-            alt="">Меню</button>
-      </nav>
     </div>
 
     <!-- ══════════════════════════════════════════
@@ -713,16 +770,16 @@
 
           <!-- Шапка документа -->
           <div class="pdf-sheet-header">
-<div class="pdf-header-left">
-  <!-- Логотип слева -->
-  <div class="pdf-logo-rezerv">Резерв<span>+</span></div>
-  
-  <!-- Метаданные справа от логотипа -->
-  <div class="pdf-doc-meta">
-    <div class="pdf-meta-title">Військово-обліковий документ</div>
-    <div class="pdf-meta-date" id="pdf-generated-date">Сформовано: --.--.----, --:--</div>
-  </div>
-</div>
+            <div class="pdf-header-left">
+              <!-- Логотип слева -->
+              <div class="pdf-logo-rezerv">Резерв<span>+</span></div>
+
+              <!-- Метаданные справа от логотипа -->
+              <div class="pdf-doc-meta">
+                <div class="pdf-meta-title">Військово-обліковий документ</div>
+                <div class="pdf-meta-date" id="pdf-generated-date">Сформовано: --.--.----, --:--</div>
+              </div>
+            </div>
             <div class="pdf-header-right">
               <img src="svg/coat-of-arms.svg" alt="" class="pdf-min-logo">
               <div class="pdf-min-title">Міністерство<br>оборони України</div>
