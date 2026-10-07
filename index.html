@@ -125,15 +125,31 @@
             </div>
           </div>
 
-          <!-- ОБРАТНАЯ СТОРОНА (Экран с QR-кодом) -->
-          <div class="card-side card-back">
-            <div class="qr-screen-content">
-              <p class="qr-status-text">QR-код дійсний до <span class="qr-date">25 липня 2027</span></p>
-              <div class="qr-code-wrapper">
-                <img src="icons/qr-code.png" alt="QR Code" class="qr-image">
-              </div>
-            </div>
-          </div>
+<!-- ОБРАТНАЯ СТОРОНА (Экран с QR-кодом) -->
+<div class="card-side card-back">
+  <div class="qr-screen-content">
+    <p class="qr-status-text">QR-код дійсний до <span class="qr-date">25 липня 2027</span></p>
+    
+    <div class="qr-code-wrapper">
+      <img src="icons/qr-code.png" alt="QR Code" class="qr-image">
+    </div>
+
+    <!-- Информационная плашка снизу -->
+    <div class="qr-info-box">
+      <div class="qr-info-icon">
+        <!-- Иконка "i" в рамке -->
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <rect x="1" y="1" width="18" height="18" rx="3" stroke="#2c2c2e" stroke-width="1.5"/>
+          <path d="M10 8.5V14.5" stroke="#2c2c2e" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="10" cy="5.5" r="1.1" fill="#2c2c2e"/>
+        </svg>
+      </div>
+      <p class="qr-info-text">
+        Виристовуйте QR-код лише за потреби та відповідально ставтеся до його поширення.
+      </p>
+    </div>
+  </div>
+</div>
         </div>
       </div>
 

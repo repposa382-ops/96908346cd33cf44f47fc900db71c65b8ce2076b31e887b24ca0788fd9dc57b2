@@ -597,27 +597,88 @@ strong {
   margin-right: 40px;
 }
 
-/* ===== QR CARD ===== */
-.qr-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 16px;
-  text-align: center;
-  margin-bottom: 14px;
+/* Обратная сторона карточки */
+.card-side.card-back {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px 16px 16px 16px; /* Внутренние отступы карточки */
+  box-sizing: border-box;
 }
 
-.qr-label {
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 12px;
-}
-
-.qr-img {
+.qr-screen-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  max-width: 260px;
-  border-radius: 10px;
-  margin: 0 auto;
+}
+/* Выравнивание содержимого обратной стороны */
+.card-back {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px 18px 18px 18px;
+  box-sizing: border-box;
+}
+
+.qr-screen-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+/* Заголовок с датой */
+.qr-status-text {
+  font-family: 'e-Ukraine Core', -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #000000;
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+/* 1. Выравниваем ширину QR-кода по ширине подложки */
+.qr-code-wrapper {
+  width: 94%; /* Растягиваем на всю доступную ширину */
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.qr-image {
+  width: 100%; /* Картинка заполняет ширину обертки */
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
   display: block;
+}
+
+/* 2. Информационная плашка такой же ширины (100%) */
+.qr-info-box {
+  width: 100%; /* Такая же ширина, как и у QR-кода */
+  background-color: #d8d7cc;
+  border-radius: 12px;
+  padding: 4px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+.qr-info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.qr-info-text {
+  font-family: 'e-Ukraine Core', -apple-system, sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #1c1c1e;
+  line-height: 1.25;
+  margin: 0;
+  letter-spacing: -0.1px;
 }
 
 /* ===== VIOLATION BLOCK ===== */
